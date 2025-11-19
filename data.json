@@ -1,0 +1,66 @@
+{
+  "personal_info": {
+    "full_name": "Oussama Ait Laasri",
+    "gender": "male",
+    "contact": { "email": "oussamasan02@gmail.com", "phone": "+212628128429", "github": "github.com/Geesama02", "linkedin": "/oussama-ait-laasri" }
+  },
+  "about_me": "I'm a motivated software engineering student with a strong foundation in programming and problem-solving. I enjoy building practical projects and continuously learning new technologies. Currently seeking an internship to apply my skills in real-world development environments and grow as a developer.",
+  "education": [
+    {
+      "institution": "1337 Coding School (42 Network)",
+      "degree": "Software Engineering",
+      "period": "2023 - PRESENT",
+      "description": "Self-driven, project-based learning with a focus on algorithms, programming, collaborative projects and peer-based learning."
+    },
+    {
+      "institution": "OFPPT",
+      "degree": "Specialized Technician in Full-Stack Web",
+      "period": "2021 - 2023",
+      "description": "Vocational training program specializing in full-stack web development, covering front-end and back-end technologies."
+    },
+    {
+      "institution": "Mohammed V High School",
+      "degree": "Science Math Baccalaureate",
+      "period": "2020 - 2021",
+      "description": "Focused on advanced mathematics and science subjects, providing a strong analytical foundation."
+    }
+  ],
+  "projects": [
+    {
+      "title": "NeonPong",
+      "type": "Full-Stack Web Application",
+      "period": "JUL 2025 - SEP 2025",
+      "description": "Developed a real-time multiplayer Pong game with user authentication, chat, and matchmaking. Built the frontend with React + Tailwind, and the backend with Fastify + WebSockets, ensuring responsive UI and low-latency gameplay. Collaborated in a team environment using Git and Agile practices."
+    },
+    {
+      "title": "Inception",
+      "type": "Docker virtualized infrastructure with multiple services",
+      "period": "APR 2025 - MAY 2025",
+      "description": "A Docker-based multi-service infrastructure project. It includes NGINX with SSL, WordPress with MariaDB, Redis for caching, an FTP server, a static website, Adminer for DB management, and Portainer for container orchestration, all managed via Docker Compose."
+    },
+    {
+      "title": "Web-Server",
+      "type": "Custom HTTP Server in C++",
+      "period": "JAN 2025 - MAR 2025",
+      "description": "Built a simple HTTP server from scratch to handle HTTP requests and responses. Focused on socket programming, multi-threading, and web protocols to create an efficient, scalable server architecture."
+    },
+    {
+      "title": "Minishell",
+      "type": "Custom Shell in C",
+      "period": "AUG 2024 - OCT 2024",
+      "description": "Developed a custom shell that replicates essential Unix shell functionality, including command parsing, piping, and redirection. Focused on system calls, process management, and environment variable handling."
+    }
+  ],
+  "ongoing_training": [
+    {
+      "provider": "GOOGLE CYBERSECURITY CERTIFICATION",
+      "description": "Gaining practical knowledge in cybersecurity fundamentals, threat analysis, and security protocols."
+    },
+    {
+      "provider": "HACK THE BOX ACADEMY",
+      "description": "Practical training focused on penetration testing, vulnerability exploitation, and real-world security challenges."
+    }
+  ],
+  "skills": ["Problem Solving", "Communication", "Collaboration", "Adaptability", "Time Management"],
+  "programming_languages": ["C", "C++", "Python", "Javascript", "Typescript", "MYSQL", "HTML", "HTML/CSS"]
+}
