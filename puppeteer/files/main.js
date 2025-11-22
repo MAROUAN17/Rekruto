@@ -17,6 +17,7 @@ let browser;
 app.post("/generate-pdf", async (req, res) => {
   const { html, title } = req.body;
 
+  console.log("body -> ", req.body);
   if (!html) {
     return res.status(400).json({ error: "Missing HTML content" });
   }
@@ -82,4 +83,4 @@ process.on("exit", async () => {
   if (browser) await browser.close();
 });
 
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+app.listen(3000, "0.0.0.0", () => console.log("Server running on http://0.0.0.0:3000"));

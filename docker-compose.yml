@@ -6,18 +6,10 @@ services:
       - "3000:3000"
     volumes:
       - ./puppeteer/files:/app
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
+  ai-agent:
+    container_name: ai-agent
+    build: python/.
     ports:
-      - "5678:5678"
-    environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=admin
-      - N8N_HOST=localhost
-      - N8N_PORT=5678
-      - NODE_ENV=production
+      - "8000:8000"
     volumes:
-      - /home/oait-laa/Desktop/n8n_work/data:/home/node/.n8n
-      # - n8n_data:/home/node/.n8n
+      - ./python/files:/app
