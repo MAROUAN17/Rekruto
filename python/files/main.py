@@ -1,11 +1,22 @@
-from fastapi import FastAPI
-from services.agent import AIagent
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
+from services.agent import AIagent, AIagentLite
 from fastapi.responses import HTMLResponse
 import zipfile
 import io
 from fastapi.responses import StreamingResponse
+import PyPDF2
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (for development)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # client = genai.Client()
 # response = client.models.generate_content(model="gemini-2.5-flash", contents="Hey!")
@@ -13,6 +24,7 @@ app = FastAPI()
 # def generateCv():
 
 agent = AIagent()
+agentLite = AIagentLite()
 with open("data.json", "r") as file:
     user_data = file.read().strip()
 
@@ -22,7 +34,7 @@ temp_res = {
 }
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 def root():
     jd = """Job title- Backend Software Engineer
 
@@ -87,3 +99,23 @@ Payment: Daily via Stripe Connect"""
         media_type="application/zip",
         headers={"Content-Disposition": 'attachment; filename="documents.zip"'},
     )
+
+
+@app.post("/extract")
+async def extract(file: UploadFile = File(...), description: str = Form(...)):
+    print("Got req")
+    try:
+        if not file.filename:
+            raise HTTPException(status_code=400)
+
+        content = await file.read()
+        pdf_reader = PyPDF2.PdfReader(io.BytesIO(content))
+        text = ""
+        for page in pdf_reader.pages:
+            text += page.extract_text()
+        res = agentLite.extractData(text)
+        print(res)
+        return res
+    except Exception as e:
+        print("err -> ", str(e))
+        raise HTTPException(status_code=500, detail=str(e))

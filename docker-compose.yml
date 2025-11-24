@@ -13,3 +13,11 @@ services:
       - "8000:8000"
     volumes:
       - ./python/files:/app
+  frontend:
+    container_name: frontend
+    build: frontend/.
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./frontend/app:/app
+      - /app/node_modules
