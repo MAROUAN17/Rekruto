@@ -21,11 +21,34 @@ try:
         resume_prompt = file.read().strip()
     with open("system_prompt.txt", "r") as file:
         system_prompt = file.read().strip()
+    with open("Extracting_prompt.txt", "r") as file:
+        extract_prompt = file.read().strip()
 except Exception as e:
     print(f"Error Opening file: {e}")
 ##################
 
 load_dotenv()
+
+
+class AIagentLite:
+    def __init__(self):
+        self.client = genai.Client()
+        self.model = "gemini-2.5-flash"
+        self.extract_prompt = extract_prompt
+
+    def extractData(self, data: str):
+        user_prompt = "Extract and structure the following resume data according to the specified schema. If any information is unclear or ambiguous, make reasonable inferences based on context.:\n\n"+ data
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=user_prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=self.extract_prompt,
+                temperature=0,
+                response_mime_type="application/json",
+            ),
+        )
+        result = json.loads(response.text)
+        return result
 
 
 class AIagent:
@@ -52,7 +75,6 @@ Resume template:
 Cover letter template:
 {self.cover_letter_template}
 """
-        print("Waiting for Ai-Agent to respond...\n")
         response = self.client.models.generate_content(
             model=self.model,
             contents=user_prompt,
@@ -62,7 +84,6 @@ Cover letter template:
                 response_mime_type="application/json",
             ),
         )
-        print("Response Ready!")
         result = json.loads(response.text)
         return result
 
