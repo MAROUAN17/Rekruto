@@ -1,0 +1,18 @@
+{
+  "name": "Rekruto - Job Autofill",
+  "description": "Scan forms and extract fields",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["scripting", "storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Job Autofill - Scraper"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
