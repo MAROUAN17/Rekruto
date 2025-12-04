@@ -37,7 +37,10 @@ class AIagentLite:
         self.extract_prompt = extract_prompt
 
     def extractData(self, data: str):
-        user_prompt = "Extract and structure the following resume data according to the specified schema. If any information is unclear or ambiguous, make reasonable inferences based on context.:\n\n"+ data
+        user_prompt = (
+            "Extract and structure the following resume data according to the specified schema. If any information is unclear or ambiguous, make reasonable inferences based on context.:\n\n"
+            + data
+        )
         response = self.client.models.generate_content(
             model=self.model,
             contents=user_prompt,

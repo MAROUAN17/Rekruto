@@ -1,7 +1,9 @@
 import express from "express";
 import puppeteer from "puppeteer";
-
+import cors from "cors";
 const app = express();
+
+app.use(cors());
 
 app.use(express.json({ limit: "10mb" }));
 
@@ -44,8 +46,20 @@ app.post("/generate-pdf", async (req, res) => {
       const body = document.body;
       const html = document.documentElement;
       return {
-        height: Math.max(body.scrollHeight, html.scrollHeight, body.offsetHeight, html.offsetHeight, body.clientHeight, html.clientHeight),
-        width: Math.max(body.scrollWidth, html.scrollWidth, body.offsetWidth, html.offsetWidth),
+        height: Math.max(
+          body.scrollHeight,
+          html.scrollHeight,
+          body.offsetHeight,
+          html.offsetHeight,
+          body.clientHeight,
+          html.clientHeight
+        ),
+        width: Math.max(
+          body.scrollWidth,
+          html.scrollWidth,
+          body.offsetWidth,
+          html.offsetWidth
+        ),
       };
     });
     // console.log("heigth -> ", height);
@@ -70,7 +84,8 @@ app.post("/generate-pdf", async (req, res) => {
     if (!title) title = "Resume";
     res.set({
       "Content-Type": "application/pdf",
-      "Content-Disposition": "attachment; filename*=UTF-8''" + encodeURIComponent(title + ".pdf"),
+      "Content-Disposition":
+        "attachment; filename*=UTF-8''" + encodeURIComponent(title + ".pdf"),
     });
     res.send(pdfBuffer);
   } catch (err) {
@@ -83,4 +98,6 @@ process.on("exit", async () => {
   if (browser) await browser.close();
 });
 
-app.listen(3000, "0.0.0.0", () => console.log("Server running on http://0.0.0.0:3000"));
+app.listen(3000, "0.0.0.0", () =>
+  console.log("Server running on http://0.0.0.0:3000")
+);
